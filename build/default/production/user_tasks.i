@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "user_tasks.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,9 +6,12 @@
 # 1 "<built-in>" 2
 # 1 "D:/SDKs/MPLAB/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
+# 1 "user_tasks.c" 2
+# 1 "./user_tasks.h" 1
 
 
+
+# 1 "./types.h" 1
 
 
 
@@ -4522,10 +4525,15 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "D:/SDKs/MPLAB/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 6 "main.c" 2
+# 4 "./types.h" 2
 
-# 1 "./types.h" 1
-# 12 "./types.h"
+
+
+
+
+
+
+
 typedef unsigned u_int;
 typedef void (*f_ptr)(void);
 
@@ -4537,12 +4545,7 @@ typedef struct pcb {
     u_int task_stack[32];
     int task_stack_size;
 } pcb_t;
-# 7 "main.c" 2
-
-# 1 "./user_tasks.h" 1
-
-
-
+# 4 "./user_tasks.h" 2
 
 
 void config_user_tasks();
@@ -4550,55 +4553,34 @@ void config_user_tasks();
 void t1();
 void t2();
 void t3();
-# 8 "main.c" 2
-
-# 1 "./system_call.h" 1
+# 1 "user_tasks.c" 2
 
 
 
-
-
-extern pcb_t FILA_TAREFAS[4];
-
-u_int rr_scheduler();
-void config_timer();
-void start_kernel();
-void __attribute__((picinterrupt(("")))) ISR_timer();
-# 9 "main.c" 2
-
-
-pcb_t FILA_TAREFAS[4];
-int vez = -1;
-int tasks_installed = 0;
-
-
-int main()
+void config_user_tasks()
 {
+   TRISDbits.RD0 = 0;
+   TRISDbits.RD1 = 0;
+   TRISDbits.RD2 = 0;
+}
 
-   config_user_tasks();
-
-
-   FILA_TAREFAS[tasks_installed].task_id = 1;
-   FILA_TAREFAS[tasks_installed].task_ptr = t1;
-   FILA_TAREFAS[tasks_installed].task_stack_size = 0;
-   tasks_installed++;
-
-   FILA_TAREFAS[tasks_installed].task_id = 2;
-   FILA_TAREFAS[tasks_installed].task_ptr = t2;
-   FILA_TAREFAS[tasks_installed].task_stack_size = 0;
-   tasks_installed++;
-
-   FILA_TAREFAS[tasks_installed].task_id = 3;
-   FILA_TAREFAS[tasks_installed].task_ptr = t3;
-   FILA_TAREFAS[tasks_installed].task_stack_size = 0;
-   tasks_installed++;
-
-   config_timer();
-   start_kernel();
-
+void t1()
+{
    while (1) {
-
+      LATDbits.LATD0 = ~PORTDbits.RD0;
    }
+}
 
-   return 0;
+void t2()
+{
+   while (1) {
+      LATDbits.LATD1 = ~PORTDbits.RD1;
+   }
+}
+
+void t3()
+{
+   while (1) {
+      LATDbits.LATD2 = ~PORTDbits.RD2;
+   }
 }
