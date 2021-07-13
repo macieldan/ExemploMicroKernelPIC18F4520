@@ -4567,6 +4567,8 @@ void __attribute__((picinterrupt(("")))) ISR_timer();
 # 9 "main.c" 2
 
 
+#pragma config WDT = OFF
+
 pcb_t FILA_TAREFAS[4];
 int vez = -1;
 int tasks_installed = 0;

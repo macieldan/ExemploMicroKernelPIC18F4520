@@ -527,18 +527,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;system_call.c: 15:    vez = rr_scheduler();
 [e = _vez -> ( _rr_scheduler ..  `i ]
 "16
-[; ;system_call.c: 16:    do { INTCONbits.GIE = 0; STKPTR = 0; if (FILA_TAREFAS[vez].task_stack_size) { do { __asm("PUSH"); TOS = FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size]; FILA_TAREFAS[vez].task_stack_size--; } while (FILA_TAREFAS[vez].task_stack_size); } else { __asm("PUSH"); TOS = FILA_TAREFAS[vez].task_ptr; } INTCONbits.GIE = 1; } while (0);
+[; ;system_call.c: 16:    do { INTCONbits.GIE = 0; STKPTR = 0; if (FILA_TAREFAS[vez].task_stack_size > 0) { do { __asm("PUSH"); FILA_TAREFAS[vez].task_stack_size--; TOS = FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size]; } while (FILA_TAREFAS[vez].task_stack_size); } else { __asm("PUSH"); TOS = FILA_TAREFAS[vez].task_ptr; } INTCONbits.GIE = 1; } while (0);
 [e :U 293 ]
 {
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 [e = _STKPTR -> -> 0 `i `uc ]
-[e $ ! != . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i 294  ]
+[e $ ! > . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i 294  ]
 {
 [e :U 297 ]
 {
 [; <" PUSH ;# ">
-[e = _TOS -> *U + &U . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 2 * -> -> . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 `ui `ux -> -> # *U &U . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 2 `ui `ux `um ]
 [e -- . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 1 `i ]
+[e = _TOS -> *U + &U . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 2 * -> -> . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 `ui `ux -> -> # *U &U . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 2 `ui `ux `um ]
 }
 [e $ != . *U + &U _FILA_TAREFAS * -> -> _vez `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i 297  ]
 [e :U 296 ]

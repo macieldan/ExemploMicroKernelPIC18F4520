@@ -8,6 +8,8 @@
 #include "user_tasks.h"
 #include "system_call.h"
 
+#pragma config WDT = OFF 
+
 pcb_t FILA_TAREFAS[MAX_TASKS];
 int vez = -1;
 int tasks_installed = 0;

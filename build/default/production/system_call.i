@@ -4570,7 +4570,7 @@ void __attribute__((picinterrupt(("")))) ISR_timer()
 {
    do { INTCONbits.GIE = 0; if (vez != -1) { FILA_TAREFAS[vez].task_stack_size = 0; while (STKPTR) { FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size] = TOS; FILA_TAREFAS[vez].task_stack_size++; __asm("POP"); } } INTCONbits.GIE = 1; } while (0);
    vez = rr_scheduler();
-   do { INTCONbits.GIE = 0; STKPTR = 0; if (FILA_TAREFAS[vez].task_stack_size) { do { __asm("PUSH"); TOS = FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size]; FILA_TAREFAS[vez].task_stack_size--; } while (FILA_TAREFAS[vez].task_stack_size); } else { __asm("PUSH"); TOS = FILA_TAREFAS[vez].task_ptr; } INTCONbits.GIE = 1; } while (0);
+   do { INTCONbits.GIE = 0; STKPTR = 0; if (FILA_TAREFAS[vez].task_stack_size > 0) { do { __asm("PUSH"); FILA_TAREFAS[vez].task_stack_size--; TOS = FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size]; } while (FILA_TAREFAS[vez].task_stack_size); } else { __asm("PUSH"); TOS = FILA_TAREFAS[vez].task_ptr; } INTCONbits.GIE = 1; } while (0);
    TMR0L = 0;
    INTCONbits.TMR0IF = 0;
 }

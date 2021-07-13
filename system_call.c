@@ -27,7 +27,7 @@ void config_timer()
    T0CONbits.PSA        = 0;      // Habilita o uso do preescaler
    T0CONbits.T0PS       = 0b010; // Seta o preescaler em 1:4
    T0CONbits.T0CS       = 0;     // Seta a referência do timer (clock interno)
-   TMR0L                = 0;
+   TMR0L                = 0;     //
 }
 
 void start_kernel()

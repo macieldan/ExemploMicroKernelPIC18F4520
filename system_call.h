@@ -30,11 +30,11 @@ do { \
 do { \
     GLOBAL_INTERRUPTS_DISABLE(); \
     STKPTR = 0; \
-    if (FILA_TAREFAS[vez].task_stack_size) { \
+    if (FILA_TAREFAS[vez].task_stack_size > 0) { \
       do { \
         asm("PUSH"); \
-        TOS = FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size]; \
         FILA_TAREFAS[vez].task_stack_size--; \
+        TOS = FILA_TAREFAS[vez].task_stack[FILA_TAREFAS[vez].task_stack_size]; \
       } while (FILA_TAREFAS[vez].task_stack_size); \
     } \
     else { \

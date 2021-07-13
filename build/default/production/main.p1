@@ -441,89 +441,83 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;D:/SDKs/MPLAB/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4520.h: 7001: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "11 main.c
-[; ;main.c: 11: pcb_t FILA_TAREFAS[4];
+[; ;main.c: 11:    FILA_TAREFAS[tasks_installed].task_id = 1;
+[p x WDT  =  OFF  ]
+"13
+[; ;main.c: 13:    FILA_TAREFAS[tasks_installed].task_stack_size = 0;
 [v _FILA_TAREFAS `S281 ~T0 @X0 -> 4 `i e ]
-"12
-[; ;main.c: 12: int vez = -1;
+"14
+[; ;main.c: 14:    tasks_installed++;
 [v _vez `i ~T0 @X0 1 e ]
 [i _vez
 -U -> 1 `i
 ]
-"13
-[; ;main.c: 13: int tasks_installed = 0;
+"15
+[; ;main.c: 15: 
 [v _tasks_installed `i ~T0 @X0 1 e ]
 [i _tasks_installed
 -> 0 `i
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"16
-[; ;main.c: 16: int main()
+"18
+[; ;main.c: 18:    FILA_TAREFAS[tasks_installed].task_stack_size = 0;
 [v _main `(i ~T0 @X0 1 ef ]
-"17
-[; ;main.c: 17: {
+"19
+[; ;main.c: 19:    tasks_installed++;
 {
 [e :U _main ]
 [f ]
-"19
-[; ;main.c: 19:    config_user_tasks();
+"21
+[; ;main.c: 21:    FILA_TAREFAS[tasks_installed].task_id = 3;
 [e ( _config_user_tasks ..  ]
-"22
-[; ;main.c: 22:    FILA_TAREFAS[tasks_installed].task_id = 1;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 0 -> -> 1 `i `ui ]
-"23
-[; ;main.c: 23:    FILA_TAREFAS[tasks_installed].task_ptr = t1;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 1 -> &U _t1 `*F2550 ]
 "24
-[; ;main.c: 24:    FILA_TAREFAS[tasks_installed].task_stack_size = 0;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i ]
+[; ;main.c: 24:    tasks_installed++;
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 0 -> -> 1 `i `ui ]
 "25
-[; ;main.c: 25:    tasks_installed++;
-[e ++ _tasks_installed -> 1 `i ]
+[; ;main.c: 25: 
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 1 -> &U _t1 `*F2550 ]
+"26
+[; ;main.c: 26:    config_timer();
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i ]
 "27
-[; ;main.c: 27:    FILA_TAREFAS[tasks_installed].task_id = 2;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 0 -> -> 2 `i `ui ]
-"28
-[; ;main.c: 28:    FILA_TAREFAS[tasks_installed].task_ptr = t2;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 1 -> &U _t2 `*F2554 ]
+[; ;main.c: 27:    start_kernel();
+[e ++ _tasks_installed -> 1 `i ]
 "29
-[; ;main.c: 29:    FILA_TAREFAS[tasks_installed].task_stack_size = 0;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i ]
+[; ;main.c: 29:    while (1) {
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 0 -> -> 2 `i `ui ]
 "30
-[; ;main.c: 30:    tasks_installed++;
-[e ++ _tasks_installed -> 1 `i ]
-"32
-[; ;main.c: 32:    FILA_TAREFAS[tasks_installed].task_id = 3;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 0 -> -> 3 `i `ui ]
-"33
-[; ;main.c: 33:    FILA_TAREFAS[tasks_installed].task_ptr = t3;
-[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 1 -> &U _t3 `*F2558 ]
-"34
-[; ;main.c: 34:    FILA_TAREFAS[tasks_installed].task_stack_size = 0;
+[; ;main.c: 30: 
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 1 -> &U _t2 `*F2554 ]
+"31
+[; ;main.c: 31:    }
 [e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i ]
-"35
-[; ;main.c: 35:    tasks_installed++;
+"32
+[; ;main.c: 32: 
 [e ++ _tasks_installed -> 1 `i ]
+"34
+[; ;main.c: 34: }
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 0 -> -> 3 `i `ui ]
+"35
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 1 -> &U _t3 `*F2558 ]
+"36
+[e = . *U + &U _FILA_TAREFAS * -> -> _tasks_installed `ui `ux -> -> # *U &U _FILA_TAREFAS `ui `ux 3 -> 0 `i ]
 "37
-[; ;main.c: 37:    config_timer();
+[e ++ _tasks_installed -> 1 `i ]
+"39
 [e ( _config_timer ..  ]
-"38
-[; ;main.c: 38:    start_kernel();
-[e ( _start_kernel ..  ]
 "40
-[; ;main.c: 40:    while (1) {
+[e ( _start_kernel ..  ]
+"42
 [e :U 284 ]
 {
-"42
-[; ;main.c: 42:    }
+"44
 }
 [e :U 283 ]
 [e $U 284  ]
 [e :U 285 ]
-"44
-[; ;main.c: 44:    return 0;
+"46
 [e ) -> 0 `i ]
 [e $UE 282  ]
-"45
-[; ;main.c: 45: }
+"47
 [e :UE 282 ]
 }

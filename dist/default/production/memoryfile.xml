@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\Exemplo_MicroKernel_05_07.X.production.hex">
+  <executable name="dist/default/production\ExemploMicroKernelPIC18F4520.production.hex">
     <memory name="program">
       <units>bytes</units>
       <length>32768</length>
-      <used>1412</used>
-      <free>31356</free>
+      <used>1424</used>
+      <free>31344</free>
     </memory>
     <memory name="data">
       <units>bytes</units>

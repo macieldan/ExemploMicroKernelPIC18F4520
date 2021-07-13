@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Exemplo_MicroKernel_05_07.X
+PROJECTNAME=ExemploMicroKernelPIC18F4520
 
 # Active Configuration
 DEFAULTCONF=default
